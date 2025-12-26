@@ -1,53 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>工业革命 — 伯明翰</title>
+  <meta charset="UTF-8"> <!-- 设置文档字符编码为UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，使页面适应不同设备 -->
+  <title>工业革命伯明翰得分表</title> <!-- 设置网页标题 -->
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.6;margin:0;padding:2rem;background:#f7f7f9;color:#222}
-    header{max-width:900px;margin:0 auto 2rem;padding:1rem 1.25rem;background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-    h1{margin:0 0 .25rem;font-size:1.6rem}
-    .content{max-width:900px;margin:0 auto;padding:0 1.25rem}
-    pre{background:#222;color:#d7ffca;padding:1rem;border-radius:6px;overflow:auto}
-    footer{max-width:900px;margin:2rem auto 0;color:#666;font-size:.9rem}
+    body {
+      font-family: Arial, sans-serif; /* 设置全局字体 */
+      margin: 20px; /* 设置页面外边距 */
+      background-color: #f9f9f9; /* 设置背景颜色 */
+    }
+    h2 {
+      text-align: center; /* 居中对齐标题 */
+      color: #333; /* 设置标题颜色 */
+    }
+    table {
+      width: 80%; /* 设置表格宽度 */
+      border-collapse: collapse; /* 合并表格边框 */
+      margin: 20px auto; /* 设置表格上下外边距和水平居中 */
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1); /* 添加阴影效果 */
+    }
+    th, td {
+      border: 1px solid #ddd; /* 设置单元格边框 */
+      padding: 12px; /* 设置单元格内边距 */
+      text-align: center; /* 文本居中对齐 */
+    }
+    th {
+      background-color: #4CAF50; /* 设置表头背景颜色 */
+      color: white; /* 设置表头文字颜色 */
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2; /* 设置偶数行背景颜色 */
+    }
+    .player-name {
+      font-weight: bold; /* 设置玩家名字加粗 */
+    }
+    .red {
+      color: red; /* 设置红色玩家的文字颜色 */
+    }
+    .yellow {
+      color: darkorange; /* 设置黄色玩家的文字颜色 */
+    }
+    .white {
+      color: black; /* 设置白色玩家的文字颜色 */
+    }
+    .purple {
+      color: purple; /* 设置紫色玩家的文字颜色 */
+    }
+    input[type="number"] {
+      width: 60px; /* 设置数字输入框宽度 */
+      text-align: center; /* 文本居中对齐 */
+      padding: 5px; /* 设置内边距 */
+      border: 1px solid #ccc; /* 设置边框 */
+      border-radius: 4px; /* 设置圆角 */
+    }
+    input[type="number"]:focus {
+      border-color: #4CAF50; /* 输入框聚焦时改变边框颜色 */
+      outline: none; /* 移除默认聚焦轮廓 */
+    }
+    .total-score {
+      font-weight: bold; /* 设置总分文字加粗 */
+      color: #333; /* 设置总分文字颜色 */
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>工业革命 — 伯明翰（示例网页）</h1>
-    <p>这是为仓库生成的示例 index.html 页面，包含简短介绍和快速导航。</p>
-  </header>
 
-  <main class="content">
-    <section>
-      <h2>简介</h2>
-      <p>伯明翰在英国工业革命中扮演重要角色，是制造和工程的中心。此示例页面用于演示如何将 HTML 文件添加到仓库并通过 Git 上传。</p>
-    </section>
+<h2>工业革命伯明翰得分表 - 伯明翰</h2> <!-- 页面主标题 -->
 
-    <section>
-      <h2>快速操作</h2>
-      <ul>
-        <li>在本地编辑此文件后运行 <code>git add index.html</code>、<code>git commit</code>、<code>git push</code></li>
-        <li>或通过 GitHub 网页上传：仓库 → Add file → Upload files</li>
-      </ul>
-    </section>
+<table id="scoreTable"> <!-- 定义表格ID以便脚本操作 -->
+  <thead>
+    <tr>
+      <th rowspan="2">玩家</th> <!-- 表头：玩家 -->
+      <th colspan="2">运河时代</th> <!-- 表头：运河时代 -->
+      <th colspan="2">铁路时代</th> <!-- 表头：铁路时代 -->
+      <th rowspan="2">总分</th> <!-- 表头：总分 -->
+    </tr>
+    <tr>
+      <th>路分</th> <!-- 表头：路分 -->
+      <th>产业分</th> <!-- 表头：产业分 -->
+      <th>路分</th> <!-- 表头：路分 -->
+      <th>产业分</th> <!-- 表头：产业分 -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="red">
+      <td class="player-name red">红</td> <!-- 红色玩家名字 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代产业分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代产业分输入框 -->
+      <td class="total-score">0</td> <!-- 总分显示单元格 -->
+    </tr>
+    <tr class="yellow">
+      <td class="player-name yellow">黄</td> <!-- 黄色玩家名字 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代产业分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代产业分输入框 -->
+      <td class="total-score">0</td> <!-- 总分显示单元格 -->
+    </tr>
+    <tr class="white">
+      <td class="player-name white">白</td> <!-- 白色玩家名字 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代产业分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代产业分输入框 -->
+      <td class="total-score">0</td> <!-- 总分显示单元格 -->
+    </tr>
+    <tr class="purple">
+      <td class="player-name purple">紫</td> <!-- 紫色玩家名字 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 运河时代产业分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代路分输入框 -->
+      <td><input type="number" oninput="updateTotalScore(this)"></td> <!-- 铁路时代产业分输入框 -->
+      <td class="total-score">0</td> <!-- 总分显示单元格 -->
+    </tr>
+  </tbody>
+</table>
 
-    <section>
-      <h2>示例代码片段</h2>
-      <pre><code>git add index.html
-git commit -m "Add index.html"
-git push origin main</code></pre>
-    </section>
+<script>
+  function updateTotalScore(inputElement) { // 定义更新总分的函数
+    const row = inputElement.closest('tr'); // 获取当前输入框所在的行
+    let totalScore = 0; // 初始化总分为0
 
-    <section>
-      <h2>下一步建议</h2>
-      <p>如果你要上线，考虑启用 GitHub Pages（仓库设置 → Pages），选择 main 分支并保存即可托管此页面。</p>
-    </section>
-  </main>
+    // Sum all the numbers in the current row except the last cell (total score)
+    const inputs = row.querySelectorAll('input[type="number"]'); // 获取当前行中的所有数字输入框
+    inputs.forEach(input => { // 遍历每个输入框
+      const value = parseFloat(input.value) || 0; // 将输入值转换为浮点数，如果为空则设为0
+      totalScore += value; // 累加到总分
+    });
 
-  <footer>
-    最后更新：自动生成 — 如需定制内容，请告诉我要写入的文本或文件结构。
-  </footer>
+    // Update the total score cell
+    const totalScoreCell = row.querySelector('.total-score'); // 获取总分显示单元格
+    totalScoreCell.textContent = totalScore; // 更新总分显示
+  }
+
+  // Initialize total scores when the page loads
+  document.addEventListener('DOMContentLoaded', () => { // 页面加载完成后执行
+    const rows = document.querySelectorAll('#scoreTable tbody tr'); // 获取表格中的所有行
+    rows.forEach(row => { // 遍历每一行
+      updateTotalScore(row.querySelector('input[type="number"]')); // 初始化该行的总分
+    });
+  });
+</script>
+
 </body>
 </html>
